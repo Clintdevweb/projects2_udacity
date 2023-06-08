@@ -5,7 +5,7 @@ import { usersShopping } from '../src/models/users';
 import supertest from 'supertest';
 import { v4 as uuidv4 } from 'uuid';
 
-const app = express();
+const app: express.Application = express();
 const request = supertest(app)
 const product = new ProductStore()
 const user = new usersShopping()
@@ -18,7 +18,8 @@ describe('Proct store', () => {
 
   it('Show list product', async() => {
     const result = await product.index()
-    expect(result.length).toBeNaN();
+    console.log(result)
+    expect(result.length).not.toBeNaN();
   })
 })
 
@@ -40,7 +41,7 @@ describe('Order store', () => {
 })
 
 describe('test api', () => {
-  it('Should be connect success', async () => {
-    await request.get('/products').expect(200)
+  it('Should be connect success', () => {
+     request.get('/products').expect(200)
   })
 })

@@ -8,7 +8,7 @@ const index = async (req: Request, res: Response) => {
   try {
   const user = await users.index()
   console.log(user);
-  res.json(user)
+  res.status(200).json(user)
     
   } catch (err) {
     res.status(400)
@@ -20,7 +20,7 @@ const index = async (req: Request, res: Response) => {
 const show = async (req: Request, res: Response) => {
   try {
     const user = await users.show(req.params.id)
-    res.json(user)
+    res.status(200).json(user)
     
   } catch (err) {
     res.status(400)
@@ -38,7 +38,7 @@ const create = async (req: Request, res: Response) => {
       password: req.body.password,
     }
     const userNew = await users.create(user)
-    res.json(userNew)
+    res.status(200).json(userNew)
   } catch (err) {
     res.status(400)
     res.json(err)

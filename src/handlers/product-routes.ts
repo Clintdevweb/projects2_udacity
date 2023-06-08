@@ -6,7 +6,7 @@ const store = new ProductStore();
 const index = async (req: Request, res: Response) => {
     try {
         const products = await store.index()
-        res.json(products)
+        res.status(200).json(products)
         
     } catch (err) {
         res.status(400)
@@ -17,7 +17,7 @@ const index = async (req: Request, res: Response) => {
 const show = async (req: Request, res: Response) => {
     try {
         const product = await store.show(req.params.id)
-        res.json(product)
+        res.status(200).json(product)
         
     } catch (err) {
         res.status(400)
@@ -34,7 +34,7 @@ const create = async (req: Request, res: Response) => {
             catory: req.body.category
         }
         const productNew = await store.create(product);
-        res.json(productNew)
+        res.status(200).json(productNew)
     } catch (err) {
         res.status(400)
         res.json(err)
@@ -44,7 +44,7 @@ const create = async (req: Request, res: Response) => {
 const getFivePopularProduct = async (req :Request, res: Response) => {
     try {
         const fiveProductPopular = await store.getFivePopularProduct()
-        res.json(fiveProductPopular)
+        res.status(200).json(fiveProductPopular)
     } catch (err) {
         res.status(400)
         res.json(err)

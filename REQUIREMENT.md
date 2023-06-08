@@ -22,21 +22,25 @@ Create [token required]: 'http://localhost:3000/products' [POST]
 
 ## Data Shapes
 #### Product
--  id
-- name
-- price
+-  id -- serial
+- name -- varchar
+- price -- number
 - [OPTIONAL] category
 
 #### User
-- id
-- firstName
-- lastName
-- password
+- id -- serial
+- firstName -- varchar
+- lastName -- varchar
+- password -- varchar
+
+#### Orders-Product
+- id  -- serial
+- id of each product in the order -- base on type id in table order
+- quantity of each product in the order 
+- user_id -- id of user type base on type id in table user
+- status of order (active or complete) -- varchar
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_idp
-- status of order (active or complete)
+-id -- serial
+-user_id -- id of user type base on type id in table user
 

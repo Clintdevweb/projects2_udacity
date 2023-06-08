@@ -9,9 +9,9 @@ const port = 3000;
 const app: express.Application = express();
 app.use(bodyParser.json());
 
-// app.get('/', (req: Request, res: Response) => {
-//     res.send('Project 2')
-// })
+app.get('/', (req: Request, res: Response) => {
+    res.send('Project 2')
+})
 
 // app.get('/users', (req: Request, res: Response) => {
 //     // const result = await user.index()

@@ -5,14 +5,28 @@ import authenticateToken from '../middle-ware/token-middleware'
 const users = new usersShopping()
 
 const index = async (req: Request, res: Response) => {
+  try {
   const user = await users.index()
   console.log(user);
   res.json(user)
+    
+  } catch (err) {
+    res.status(400)
+    res.json(err)
+  }
+
 }
 
 const show = async (req: Request, res: Response) => {
-  const user = await users.show(req.params.id)
-  res.json(user)
+  try {
+    const user = await users.show(req.params.id)
+    res.json(user)
+    
+  } catch (err) {
+    res.status(400)
+    res.json(err)
+  }
+
 }
 
 const create = async (req: Request, res: Response) => {

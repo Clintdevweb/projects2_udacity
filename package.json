@@ -13,6 +13,7 @@
   "author": "HanhNV4",
   "license": "ISC",
   "dependencies": {
+    "@types/supertest": "^2.0.12",
     "@types/uuid": "^9.0.1",
     "body-parser": "^1.20.2",
     "db-migrate": "^0.11.13",
@@ -35,6 +36,7 @@
     "@types/pg": "^8.10.1",
     "jasmine": "^5.0.0",
     "prettier": "^2.8.8",
+    "supertest": "^6.3.3",
     "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.4",
     "typescript": "^5.0.4"

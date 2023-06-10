@@ -24,6 +24,18 @@ describe('Proct store', () => {
     expect(product.create).toBeDefined();
   })
 
+  it('fetch all products', async () => {
+    const item = {
+        id: '3',
+        name: "Legion Laptop",
+        price: 800,
+        category: "Laptop"
+    }
+    await product.create(item)
+    const products = await product.index()
+
+    expect(products.length).toBeGreaterThan(0);
+  });
 
 
   it('Show list product', async() => {
@@ -42,8 +54,23 @@ describe('Proct store', () => {
     });
   })
 
-  it('Should be connect api success', () => {
+  it('Should be connect api success route', () => {
     request.get('/products').expect(200)
+  })
+
+  it('get all product by for api success route', () => {
+    request
+      .get('/products/1')
+      .expect(200)
+  })
+
+  it('get a product by for api success route', () => {
+    request
+      .get('/products/1')
+      .send({
+        id: '1'
+      })
+      .expect(200)
   })
 
   it('Create a product for api success', () => {
@@ -78,7 +105,7 @@ describe('User store', () => {
     expect(user.index).toBeDefined()
   })
 
-  it('Create user success for call api', () => {
+  it('Create user success for call api - route', () => {
     const tokenRequest: any = user.generateAccessToken({
       userName: 'hanh',
       password: 'hanh123',
@@ -103,9 +130,23 @@ describe('Order store', () => {
     expect(order.getOrderByUserId).toBeDefined()
   })
 
-  it('get order success', async() => {
+  it('get order success ', async() => {
       const result = await order.getOrderByUserId('1')
       expect(result.length).not.toBeNaN()
+  })
+
+  it('Create oder success - route', () => {
+    const tokenRequest: any = user.generateAccessToken({
+      userName: 'hanh',
+      password: 'hanh123',
+    })
+    request
+      .get('/order-product/:userid')
+      .set('Authorization', `bearer ${tokenRequest.token}`)
+      .send({
+        id: '1',
+      })
+      .expect(200)
   })
 })
 

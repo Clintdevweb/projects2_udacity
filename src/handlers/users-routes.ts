@@ -48,7 +48,7 @@ const create = async (req: Request, res: Response) => {
 const userRoutes = (app: Application) => {
   app.get('/users', index)
   app.get('/users/:id', show)
-  app.post('/users', authenticateToken, create)
+  app.post('/users/sign-in', authenticateToken, create)
 }
 
 export default userRoutes

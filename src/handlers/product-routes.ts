@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { Product, ProductStore } from "../models/product";
+import authenticateToken from "../middle-ware/token-middleware";
 
 const store = new ProductStore();
 
@@ -31,7 +32,7 @@ const create = async (req: Request, res: Response) => {
         const product: Product = {
             name: req.body.name,
             price: req.body.price,
-            catory: req.body.category
+            category: req.body.category
         }
         const productNew = await store.create(product);
         res.status(200).json(productNew)
@@ -54,7 +55,7 @@ const getFivePopularProduct = async (req :Request, res: Response) => {
 const productRoutes = (app: express.Application) => {
     app.get('/products', index)
     app.get('/products/:id', show)
-    app.post('/products', create)
+    app.post('/products/create', authenticateToken, create)
     app.get('/products-five-popular', getFivePopularProduct)
 }
 

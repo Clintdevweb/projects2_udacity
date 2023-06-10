@@ -1,10 +1,10 @@
 import Client from "../database";
 
 export type Product = {
-    id?: string;
+    id?: any;
     name: string;
     price: number;
-    catory?: string
+    category?: any;
 }
 
 export class ProductStore {
@@ -20,11 +20,13 @@ export class ProductStore {
         }
     }
 
-    async show(id: string): Promise<Product[]> {
+    async show(id: string): Promise<Product> {
         try {
             const connect = await Client.connect();
             const sql = 'SELECT * FROM product WHERE id=($1)';
             const result = await connect.query(sql, [id]);
+            console.log(result);
+            console.log('result---', result);
             connect.release();
             return result.rows[0]
         } catch (err) {
@@ -36,7 +38,7 @@ export class ProductStore {
         try {
             const connect = await Client.connect();
             const sql = 'INSERT INTO product (name, price, category) VALUES ($1, $2, $3)';
-            const result = await connect.query(sql, [product.name, product.price, product.catory])
+            const result = await connect.query(sql, [product.name, product.price, product.category])
             connect.release();
             return result.rows[0]
 

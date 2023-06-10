@@ -5,8 +5,10 @@ export class Orders {
         try {
             const connect = await Client.connect();
             const sql = `SELECT * FROM orders WHERE user_id=($1)`;
-            const result = await connect.query(sql, [user_id])
-            
+            const result = await connect.query(sql, [user_id]);
+            connect.release();
+
+            return result.rows
         } catch (err) {
             throw new Error(`Can not get order product ${err}`)
         }

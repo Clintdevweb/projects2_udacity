@@ -7,14 +7,15 @@ const { TOKEN_SECRET } = process.env
 
 export type User =  {
     id?: string,
-    firstName: string,
-    lastName: string,
-    password: string
+    firstName?: string,
+    lastName?: string,
+    userName?: string,
+    password?: string
 }
 
 export class usersShopping {
-    generateAccessToken(user: any) {
-        return jwt.sign(user, TOKEN_SECRET as string)
+    generateAccessToken(user: User) {
+        return jwt.sign({userName: user.userName, password: user.password}, TOKEN_SECRET as string)
     }
 
     async index(): Promise<User[]> {

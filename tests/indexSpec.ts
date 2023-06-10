@@ -16,11 +16,57 @@ describe('Proct store', () => {
     expect(product.index).toBeDefined();
   })
 
+  it('should have an show method', () => {
+    expect(product.show).toBeDefined();
+  })
+
+  it('should have an create method', () => {
+    expect(product.create).toBeDefined();
+  })
+
+
+
   it('Show list product', async() => {
     const result = await product.index()
-    console.log(result)
     expect(result.length).not.toBeNaN();
   })
+
+  it('Show specify product', async() => {
+    const result = await product.show('1')
+    console.log(result)
+    expect(result).toEqual({
+      'id': 1,
+      'name': 'iphone',
+      'price': 100,
+      'category': null
+    });
+  })
+
+  it('Should be connect api success', () => {
+    request.get('/products').expect(200)
+  })
+
+  it('Create a product for api success', () => {
+    const tokenRequest: any = user.generateAccessToken({
+      userName: 'hanh',
+      password: 'hanh123',
+    })
+    request
+      .post('/products/create')
+      .set('Authorization', `bearer ${tokenRequest.token}`)
+      .send({
+        name: 'iphone',
+        price: 1000,
+        category: 'new'
+      })
+      .expect(200)
+  })
+
+  it('get five products popular', async() => {
+     const result = await product.getFivePopularProduct()
+     expect(result.length).not.toBeNaN();
+  })
+
 })
 
 describe('User store', () => {
@@ -32,16 +78,34 @@ describe('User store', () => {
     expect(user.index).toBeDefined()
   })
 
+  it('Create user success for call api', () => {
+    const tokenRequest: any = user.generateAccessToken({
+      userName: 'hanh',
+      password: 'hanh123',
+    })
+    request
+      .post('/users/sign-in')
+      .set('Authorization', `bearer ${tokenRequest.token}`)
+      .send({
+        id: '1',
+        firstName: 'ngo',
+        lastName: 'hanh',
+        userName: 'hanh123',
+        password: 'hanh123',
+      })
+      .expect(200)
+  })
+
 })
 
 describe('Order store', () => {
   it('should have an index method', () => {
     expect(order.getOrderByUserId).toBeDefined()
   })
-})
 
-describe('test api', () => {
-  it('Should be connect success', () => {
-     request.get('/products').expect(200)
+  it('get order success', async() => {
+      const result = await order.getOrderByUserId('1')
+      expect(result.length).not.toBeNaN()
   })
 })
+

@@ -26,7 +26,7 @@ describe('Proct store', () => {
 
   it('fetch all products', async () => {
     const item = {
-        id: '3',
+        id: uuidv4(),
         name: "Legion Laptop",
         price: 800,
         category: "Laptop"
